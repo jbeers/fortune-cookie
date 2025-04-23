@@ -1,7 +1,20 @@
 {
+    "app":{
+        "cfengine":"boxlang",
+        "serverHomeDirectory":".boxlang"
+    },
+    "jvm":{
+        "javaVersion":"openjdk21"
+    },
     "web":{
         "rewrites":{
             "enable":"true"
         }
+    },
+    "env":{
+        "BOXLANG_DEBUG":true
+    },
+    "scripts":{
+        "onServerInstall":"install bx-compat-cfml"
     }
 }
