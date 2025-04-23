@@ -13,6 +13,8 @@ Created `resources/docker-compose.yml`
 added commandbox service
 added db service
 
+update env file
+
 Use `docker compose --env-file .env -f resources/docker-compose.yml up`
 
 executed into commandbox service using `docker compose -f .\resources\docker-compose.yml exec -it commandbox /bin/bash`
