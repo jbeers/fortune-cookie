@@ -11,10 +11,10 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 </head>
-<body class="w-screen h-screen overflow-x-hidden flex flex-col items-center justify-center">
-	<div class="flex flex-col gap-8 text-xl items-center">
-		<h1>Fortune Cookie App</h1>
-		<div class="flex flex-col items-center gap-4">
+<body class="w-screen h-screen overflow-x-hidden flex flex-col items-center p-32">
+	<div class="flex flex-col text-xl items-center">
+		<h1 class="mb-64">Fortune Cookie App</h1>
+		<div class="flex flex-col items-center gap-8">
 			<p class="text-base w-64 text-center">Fortune goes here</p>
 			<div class="flex gap-4">
 				<button class="w-12 h-12 bg-green-300 text-2xl cursor-pointer"><i class="fa-solid fa-thumbs-up"></i></i></button>
