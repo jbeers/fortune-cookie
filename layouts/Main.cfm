@@ -9,15 +9,33 @@
 	<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 	<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+	<script>
+		document.addEventListener('alpine:init', () => {
+			Alpine.data('fortuneApp', () => ({
+				message: 'Fortune goes here',
+				
+				init(){
+					this.randomFortune();
+				},
 
+				async randomFortune(){
+					const response = await fetch( "/fortune/random" );
+					const data = await response.json();
+
+					this.message = data.data[0].fortune;
+				}
+			}));
+		});
+	</script>
 </head>
 <body class="w-screen h-screen overflow-x-hidden flex flex-col items-center p-32">
-	<div class="flex flex-col text-xl items-center">
+	<div x-data="fortuneApp" class="flex flex-col text-xl items-center">
 		<h1 class="mb-64">Fortune Cookie App</h1>
 		<div class="flex flex-col items-center gap-8">
-			<p class="text-base w-64 text-center">Fortune goes here</p>
+			<p class="text-base w-64 text-center" x-text="message"></p>
 			<div class="flex gap-4">
 				<button class="w-12 h-12 bg-green-300 text-2xl cursor-pointer"><i class="fa-solid fa-thumbs-up"></i></i></button>
+				<button class="h-12 bg-gray-300 text-2xl cursor-pointer px-2" @click="randomFortune">New Fortune</button>
 				<button class="w-12 h-12 bg-red-300 text-2xl cursor-pointer"><i class="fa-solid fa-thumbs-down fa-flip-horizontal"></i></button>
 			</div>
 		</div>
