@@ -25,3 +25,8 @@ create first migration     `box migrate create`
 install qb `box install qb`
 
 Add route handlers and update router
+
+Checkout the repo history
+git --no-pager log --oneline milestone-1-initial-state..milestone-2-basic-app
+git diff milestone-1-initial-state..milestone-2-basic-app
+https://github.com/jbeers/fortune-cookie/compare/milestone-1-initial-state...milestone-2-basic-app
