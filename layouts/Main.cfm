@@ -12,7 +12,7 @@
 	<script>
 		document.addEventListener('alpine:init', () => {
 			Alpine.data('fortuneApp', () => ({
-				message: 'Fortune goes here',
+				fortune: {},
 				
 				init(){
 					this.randomFortune();
@@ -22,7 +22,21 @@
 					const response = await fetch( "/fortune/random" );
 					const data = await response.json();
 
-					this.message = data.data[0].fortune;
+					this.fortune = data.data[0];
+				},
+
+				async like( fortuneId ){
+					const response = await fetch( `/fortune/${fortuneId}/up` );
+					const data = await response.json();
+
+					this.fortune = data.data;
+				},
+
+				async dislike( fortuneId ){
+					const response = await fetch( `/fortune/${fortuneId}/down` );
+					const data = await response.json();
+
+					this.fortune = data.data;
 				}
 			}));
 		});
@@ -32,11 +46,17 @@
 	<div x-data="fortuneApp" class="flex flex-col text-xl items-center">
 		<h1 class="mb-64">Fortune Cookie App</h1>
 		<div class="flex flex-col items-center gap-8">
-			<p class="text-base w-64 text-center" x-text="message"></p>
+			<p class="text-base w-64 text-center" x-text="fortune.fortune"></p>
 			<div class="flex gap-4">
-				<button class="w-12 h-12 bg-green-300 text-2xl cursor-pointer"><i class="fa-solid fa-thumbs-up"></i></i></button>
+				<div class="flex flex-col items-center">
+					<button class="w-12 h-12 bg-green-300 text-2xl cursor-pointer" @click="like( fortune.id )"><i class="fa-solid fa-thumbs-up"></i></i></button>
+					<span x-text="fortune.likeCount"></span>
+				</div>
 				<button class="h-12 bg-gray-300 text-2xl cursor-pointer px-2" @click="randomFortune">New Fortune</button>
-				<button class="w-12 h-12 bg-red-300 text-2xl cursor-pointer"><i class="fa-solid fa-thumbs-down fa-flip-horizontal"></i></button>
+				<div class="flex flex-col items-center">
+					<button class="w-12 h-12 bg-red-300 text-2xl cursor-pointer" @click="dislike( fortune.id )"><i class="fa-solid fa-thumbs-down fa-flip-horizontal"></i></button>
+					<span x-text="fortune.dislikeCount"></span>
+				</div>
 			</div>
 		</div>
 	</div>

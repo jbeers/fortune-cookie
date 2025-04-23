@@ -31,6 +31,10 @@ component extends="coldbox.system.RestHandler" {
             .update({
                 likeCount: fortune.likeCount + 1
             });
+
+        var fortune = qb.from( "fortunes" ).findOrFail( rc.id );
+
+        response.setData( fortune );
     }
 
     function down( event, rc, prc ){
@@ -43,5 +47,9 @@ component extends="coldbox.system.RestHandler" {
             .update({
                 dislikeCount: fortune.dislikeCount + 1
             });
+
+        var fortune = qb.from( "fortunes" ).findOrFail( rc.id );
+
+        response.setData( fortune );
     }
 }
