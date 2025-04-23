@@ -54,7 +54,7 @@ component {
 	 * ORM + Datasource Settings
 	 * --------------------------------------------------------------------------
 	 */
-	this.datasource = "coldbox";
+	this.datasource = "fortunecookies";
 
 	/**
 	 * Fires when the application starts
