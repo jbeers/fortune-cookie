@@ -11,11 +11,13 @@ component extends="coldbox.system.RestHandler" {
     }
 
     function random( event, rc, prc ){
+        event.paramValue( "notId", "" );
         var response = event.getResponse();
 
         var randomFortune = qb.from( "fortunes" )
             .orderBYRaw( "RAND()" )
             .limit(1)
+            .when( event.getValue( "notId" ) != "", ( q ) => q.where( "id", "!=", event.getValue( "notId" ) ) )
             .get();
 
         response.setData( randomFortune );
