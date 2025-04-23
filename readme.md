@@ -7,3 +7,4 @@ This is an app that demonstrates how to build a simple API/site using BoxLang an
 Created folder
 Initialized repo
 Added readme
+Ran `box coldbox create app skeleton=SuperSimple`
