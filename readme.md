@@ -21,3 +21,7 @@ executed into commandbox service using `docker compose -f .\resources\docker-com
 installed migrations    `box install commandbox-migrations`
 innited migrations     `box migrate init`
 create first migration     `box migrate create`
+
+install qb `box install qb`
+
+Add route handlers and update router
