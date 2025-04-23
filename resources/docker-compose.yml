@@ -1,6 +1,6 @@
 services:
   commandbox:
-    image: ortussolutions/commandbox:lucee5
+    image: ortussolutions/commandbox:boxlang
     ports:
       - 4080:8080
     volumes:
@@ -14,8 +14,14 @@ services:
       MYSQL_DATABASE: ${DB_DATABASE}
       MYSQL_USER: ${DB_USER}
       MYSQL_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      # persist data so we don't lose our tables!
+      - mysql-data:/var/lib/mysql
     networks:
       - net
 
 networks:
   net:
+  
+volumes:
+  mysql-data:  # Define the named volume here
