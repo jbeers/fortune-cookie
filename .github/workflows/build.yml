@@ -49,7 +49,9 @@ jobs:
             tags+=",ghcr.io/$lcased/${{ env.DOCKER_IMAGE_NAME }}:staging"
           fi
 
-          echo "tags=$tags" >> "$GITHUB_OUTPUT"         
+          echo "tags=$tags" >> "$GITHUB_OUTPUT" 
+
+          rm .env.example        
 
       - name: Setup CommandBox
         uses: Ortus-Solutions/setup-commandbox@main
