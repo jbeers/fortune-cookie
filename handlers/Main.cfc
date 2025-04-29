@@ -4,7 +4,6 @@
 	 * Default Action
 	 */
 	function index( event, rc, prc ){
-		
 	}
 
 	/**
