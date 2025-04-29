@@ -44,6 +44,8 @@ jobs:
         run: |
           box install commandbox-migrations
 
+          box migrate install
+
           box migrate up --verbose
   build:
     name: Build & Publish
