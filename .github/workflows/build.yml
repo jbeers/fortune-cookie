@@ -16,8 +16,7 @@ permissions:
   packages: write
 
 jobs:
-  runMigrations:
-    id: migrations
+  migrations:
     name: Run Migrations
     runs-on: self-hosted
     steps:
@@ -41,8 +40,7 @@ jobs:
   build:
     name: Build & Publish
     runs-on: ubuntu-latest
-    id: build
-    depends-on: migrations
+    needs: migrations
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -104,11 +102,10 @@ jobs:
           tags: ${{ steps.vars.outputs.tags }}
           push: true
   deploy:
-    depends-on: build
+    needs: build
     name: Deploy
     runs-on: ubuntu-latest
     steps:
-
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
