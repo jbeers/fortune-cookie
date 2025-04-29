@@ -5,11 +5,11 @@ This is an app that demonstrates how to build a simple API/site using BoxLang an
 # Helpful commands
 
 ```
-docker compose --env-file .env -f .\resources\docker-compose.yml up
+docker compose --env-file .env -f ./resources/docker-compose.yml up
 
-docker compose --env-file .env -f .\resources\docker-compose.yml down
+docker compose --env-file .env -f ./resources/docker-compose.yml down
 
-docker compose --env-file .env -f .\resources\docker-compose.yml exec -it commandbox box
+docker compose --env-file .env -f ./resources/docker-compose.yml exec -it commandbox box
 ```
 
 # Development Roadmap
