@@ -44,7 +44,7 @@ jobs:
         run: |
           box install commandbox-migrations
 
-          box migrate up
+          box migrate up --verbose
   build:
     name: Build & Publish
     runs-on: ubuntu-latest
