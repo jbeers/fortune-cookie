@@ -41,6 +41,7 @@ jobs:
   build:
     name: Build & Publish
     runs-on: ubuntu-latest
+    id: build
     depends-on: migrations
     steps:
       - name: Checkout Repository
