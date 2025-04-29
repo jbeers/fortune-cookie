@@ -1,0 +1,129 @@
+{
+    "taskDefinitionArn": "arn:aws:ecs:us-east-2:168595402674:task-definition/Workshop-FortuneCookieApp:2",
+    "containerDefinitions": [
+        {
+            "name": "fortune-cookie-app",
+            "image": "ghcr.io/jbeers/fortune-cookie/app:production",
+            "repositoryCredentials": {
+                "credentialsParameter": "arn:aws:secretsmanager:us-east-2:168595402674:secret:workshop/fortunecookie/gitcredentials-6D2QiD"
+            },
+            "cpu": 0,
+            "portMappings": [
+                {
+                    "name": "fortune-cookie-app-8080-tcp",
+                    "containerPort": 8080,
+                    "hostPort": 8080,
+                    "protocol": "tcp",
+                    "appProtocol": "http"
+                }
+            ],
+            "essential": true,
+            "environment": [],
+            "environmentFiles": [],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "secrets": [
+                {
+                    "name": "DB_HOST",
+                    "valueFrom": "arn:aws:secretsmanager:us-east-2:168595402674:secret:workshop/fortunecookie/appvars-R7vVXa:DB_HOST::"
+                },
+                {
+                    "name": "DB_PORT",
+                    "valueFrom": "arn:aws:secretsmanager:us-east-2:168595402674:secret:workshop/fortunecookie/appvars-R7vVXa:DB_PORT::"
+                },
+                {
+                    "name": "DB_DATABASE",
+                    "valueFrom": "arn:aws:secretsmanager:us-east-2:168595402674:secret:workshop/fortunecookie/appvars-R7vVXa:DB_DATABASE::"
+                },
+                {
+                    "name": "DB_USER",
+                    "valueFrom": "arn:aws:secretsmanager:us-east-2:168595402674:secret:workshop/fortunecookie/appvars-R7vVXa:DB_USER::"
+                },
+                {
+                    "name": "DB_PASSWORD",
+                    "valueFrom": "arn:aws:secretsmanager:us-east-2:168595402674:secret:workshop/fortunecookie/appvars-R7vVXa:DB_PASSWORD::"
+                }
+            ],
+            "ulimits": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/Workshop-FortuneCookieApp",
+                    "mode": "non-blocking",
+                    "awslogs-create-group": "true",
+                    "max-buffer-size": "25m",
+                    "awslogs-region": "us-east-2",
+                    "awslogs-stream-prefix": "ecs"
+                },
+                "secretOptions": []
+            },
+            "healthCheck": {
+                "command": [
+                    "CMD-SHELL",
+                    "curl -f http://localhost:8080/healthcheck || exit 1"
+                ],
+                "interval": 30,
+                "timeout": 5,
+                "retries": 3,
+                "startPeriod": 300
+            },
+            "systemControls": []
+        }
+    ],
+    "family": "Workshop-FortuneCookieApp",
+    "executionRoleArn": "arn:aws:iam::168595402674:role/ecsTaskExecutionRole",
+    "networkMode": "awsvpc",
+    "revision": 2,
+    "volumes": [],
+    "status": "ACTIVE",
+    "requiresAttributes": [
+        {
+            "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+        },
+        {
+            "name": "ecs.capability.execution-role-awslogs"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+        },
+        {
+            "name": "ecs.capability.secrets.asm.environment-variables"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.28"
+        },
+        {
+            "name": "ecs.capability.private-registry-authentication.secretsmanager"
+        },
+        {
+            "name": "ecs.capability.container-health-check"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+        },
+        {
+            "name": "ecs.capability.task-eni"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
+        }
+    ],
+    "placementConstraints": [],
+    "compatibilities": [
+        "EC2",
+        "FARGATE"
+    ],
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "1024",
+    "memory": "2048",
+    "runtimePlatform": {
+        "cpuArchitecture": "X86_64",
+        "operatingSystemFamily": "LINUX"
+    },
+    "registeredAt": "2025-04-29T18:29:26.606Z",
+    "registeredBy": "arn:aws:iam::168595402674:user/jbeers",
+    "enableFaultInjection": false,
+    "tags": []
+}
