@@ -36,6 +36,23 @@ install qb `box install qb`
 
 Add route handlers and update router
 
+Configure AWS
+    Create cluster
+    Create secrets
+    Create other resources
+        ec2
+        security groups
+        database
+        etc...
+    Create task definition
+
+Update actions
+    add migrations
+    setup openid connect https://aws.amazon.com/blogs/security/use-iam-roles-to-connect-github-actions-to-actions-in-aws/
+    add aws deploy
+
+
+
 Checkout the repo history
 git --no-pager log --oneline milestone-1-initial-state..milestone-2-basic-app
 git diff milestone-1-initial-state..milestone-2-basic-app

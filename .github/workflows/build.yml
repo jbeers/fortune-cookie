@@ -8,6 +8,7 @@ on:
 
 env:
   DOCKER_IMAGE_NAME: app
+  AWS_REGION: us-east-1
 
 permissions:
   id-token: write
@@ -15,9 +16,32 @@ permissions:
   packages: write
 
 jobs:
+  runMigrations:
+    id: migrations
+    name: Run Migrations
+    runs-on: self-hosted
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v3.9.0
+        with:
+          distribution: "temurin"
+          java-version: "11"
+
+      - name: Setup CommandBox
+        uses: Ortus-Solutions/setup-commandbox@main
+
+      - name: Run Migrations
+        run: |
+          box install commandbox-migrations
+
+          box migrate up
   build:
     name: Build & Publish
     runs-on: ubuntu-latest
+    depends-on: migrations
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -30,9 +54,6 @@ jobs:
 
       - name: Setup vars
         id: vars
-        env:
-          ***REMOVED***
-          ***REMOVED***
         run: |
           lcased=$(echo "${{ github.repository }}" | tr "[:upper:]" "[:lower:]")
 
@@ -81,3 +102,24 @@ jobs:
           file: .github/build/Dockerfile
           tags: ${{ steps.vars.outputs.tags }}
           push: true
+  deploy:
+    depends-on: build
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: ${{ env.AWS_REGION }}
+          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          role-session-name: MySessionName
+
+      - name: Deploy Amazon ECS task definition
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v2
+        with:
+          task-definition: task-definition.json
+          desired-count: 1
+          service: Workshop-FortuneCookieApp-service-2c2du44x
+          cluster: fortunecookie
+          wait-for-service-stability: true
