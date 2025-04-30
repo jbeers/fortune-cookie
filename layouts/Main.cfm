@@ -57,7 +57,7 @@
 				</div>
 				<div class="flex flex-col items-center">
 					<button class="h-12 bg-gray-300 text-2xl cursor-pointer px-2" @click="randomFortune( fortune.id )">New Fortune</button>
-					<span x-text="'Viewed: ' + fortune.viewCount"></span>
+					<span x-text="fortune.viewCount ? 'Viewed: ' + fortune.viewCount : ''"></span>
 				</div>
 				<div class="flex flex-col items-center">
 					<button class="w-12 h-12 bg-red-300 text-2xl cursor-pointer" @click="dislike( fortune.id )"><i class="fa-solid fa-thumbs-down fa-flip-horizontal"></i></button>
