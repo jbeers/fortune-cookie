@@ -8,7 +8,7 @@ on:
 
 env:
   DOCKER_IMAGE_NAME: app
-  AWS_REGION: us-east-1
+  AWS_REGION: us-east-2
 
 permissions:
   id-token: write
