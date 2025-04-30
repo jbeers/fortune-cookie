@@ -19,9 +19,16 @@ component extends="coldbox.system.RestHandler" {
 			.orderBYRaw( "RAND()" )
 			.limit( 1 )
 			.when( event.getValue( "notId" ) != "", ( q ) => q.where( "id", "!=", event.getValue( "notId" ) ) )
-			.get();
+			.first();
 
-		response.setData( randomFortune );
+		randomFortune.viewCount += 1;
+
+		// update the viewCount in the fortune
+		qb.from( "fortunes" )
+			.where( "id", randomFortune.id )
+			.update( { viewCount : randomFortune.viewCount } );
+
+		response.setData( [ randomFortune ] );
 	}
 
 	function up( event, rc, prc ){
