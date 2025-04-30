@@ -21,6 +21,7 @@ component {
 	this.timezone             = "UTC";
 	this.whiteSpaceManagement = "smart";
 
+
 	/**
 	 * --------------------------------------------------------------------------
 	 * ColdBox Bootstrap Settings
@@ -68,6 +69,7 @@ component {
 			COLDBOX_APP_MAPPING
 		);
 		application.cbBootstrap.loadColdbox();
+		application.appId = createUUID();
 		return true;
 	}
 

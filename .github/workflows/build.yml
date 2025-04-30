@@ -132,7 +132,7 @@ jobs:
         uses: aws-actions/amazon-ecs-deploy-task-definition@v2
         with:
           task-definition: ./.github/build/task-definition.json
-          desired-count: 1
+          desired-count: 5
           service: Workshop-FortuneCookieApp-service-2c2du44x
           cluster: fortunecookie
           wait-for-service-stability: true
